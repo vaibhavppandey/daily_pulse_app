@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "904427405723",
+    "project_id": "daily-pulse-lol",
+    "storage_bucket": "daily-pulse-lol.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904427405723:android:db3fa49d1d2d0cb364a13e",
+        "android_client_info": {
+          "package_name": "com.example.daily_pulse_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcMJQzYPJ2qU5zQLGfU8rN7IEkB32PTYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904427405723:android:58feb6338335ad3564a13e",
+        "android_client_info": {
+          "package_name": "com.vaibhavp.dailypulse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcMJQzYPJ2qU5zQLGfU8rN7IEkB32PTYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
