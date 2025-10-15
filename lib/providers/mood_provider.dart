@@ -4,8 +4,17 @@ import '../models/mood_entry.dart';
 
 class MoodProvider with ChangeNotifier {
   List<MoodEntry> _entries = [];
+  DateTime _selectedDate = DateTime.now();
 
   List<MoodEntry> get entries => _entries;
+  DateTime get selectedDate => _selectedDate;
+
+  List<MoodEntry> get selectedEntries => _entries
+      .where((entry) =>
+          entry.date.year == _selectedDate.year &&
+          entry.date.month == _selectedDate.month &&
+          entry.date.day == _selectedDate.day)
+      .toList();
 
   Future<void> loadEntries() async {
     final prefs = await SharedPreferences.getInstance();
@@ -23,6 +32,11 @@ class MoodProvider with ChangeNotifier {
     _entries.add(newEntry);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('mood_entries', MoodEntry.encode(_entries));
+    notifyListeners();
+  }
+
+  void setSelectedDate(DateTime date) {
+    _selectedDate = date;
     notifyListeners();
   }
 }

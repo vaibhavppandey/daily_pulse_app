@@ -1,15 +1,16 @@
+import 'package:daily_pulse_app/widgets/mood_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/mood_provider.dart';
 
-class MoodLoggingScreen extends StatefulWidget {
-  const MoodLoggingScreen({super.key});
+class MoodLoggingPage extends StatefulWidget {
+  const MoodLoggingPage({super.key});
 
   @override
-  State<MoodLoggingScreen> createState() => _MoodLoggingScreenState();
+  State<MoodLoggingPage> createState() => _MoodLoggingPageState();
 }
 
-class _MoodLoggingScreenState extends State<MoodLoggingScreen> {
+class _MoodLoggingPageState extends State<MoodLoggingPage> {
   final List<String> _moods = ['😊', '😄', '😐', '😔', '😠'];
   String? _selectedMood;
   final _noteController = TextEditingController();
@@ -50,33 +51,14 @@ class _MoodLoggingScreenState extends State<MoodLoggingScreen> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: _moods.map((mood) {
-                  final isSelected = _selectedMood == mood;
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedMood = mood;
-                      });
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        color: isSelected
-                            ? Theme.of(context).primaryColor.withOpacity(0.3)
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(
-                        mood,
-                        style: const TextStyle(fontSize: 30),
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
+            MoodSelection(
+              moods: _moods,
+              selectedMood: _selectedMood,
+              onMoodSelected: (mood) {
+                setState(() {
+                  _selectedMood = mood;
+                });
+              },
             ),
             const SizedBox(height: 20),
             TextField(

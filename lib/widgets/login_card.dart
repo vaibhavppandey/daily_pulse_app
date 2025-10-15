@@ -1,3 +1,4 @@
+import 'package:daily_pulse_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
@@ -37,9 +38,19 @@ class _LoginCardState extends State<LoginCard> {
     });
   }
 
-  void _login(BuildContext context) {
+  void _login(BuildContext context) async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    authProvider.login(_emailController.text, _passwordController.text);
+    final success = await authProvider.login(
+      _emailController.text,
+      _passwordController.text,
+    );
+
+    if (success && mounted) {
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const HomePage()),
+        (Route<dynamic> route) => false,
+      );
+    }
   }
 
   @override
