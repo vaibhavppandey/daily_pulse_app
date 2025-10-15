@@ -1,8 +1,9 @@
+import 'package:daily_pulse_app/firebase/db.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../models/mood_entry.dart';
 
 class MoodProvider with ChangeNotifier {
+  final FirestoreService _firestoreService = FirestoreService();
   List<MoodEntry> _entries = [];
   DateTime _selectedDate = DateTime.now();
 
@@ -17,9 +18,7 @@ class MoodProvider with ChangeNotifier {
       .toList();
 
   Future<void> loadEntries() async {
-    final prefs = await SharedPreferences.getInstance();
-    final existingEntries = prefs.getString('mood_entries') ?? '[]';
-    _entries = MoodEntry.decode(existingEntries);
+    _entries = await _firestoreService.getEntries();
     notifyListeners();
   }
 
@@ -29,9 +28,8 @@ class MoodProvider with ChangeNotifier {
       mood: mood,
       note: note,
     );
+    await _firestoreService.addEntry(newEntry);
     _entries.add(newEntry);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('mood_entries', MoodEntry.encode(_entries));
     notifyListeners();
   }
 
