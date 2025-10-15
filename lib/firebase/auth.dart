@@ -58,4 +58,9 @@ class AuthService {
   Future<String?> getToken() async {
     return await _storage.read(key: StorageConstants.token);
   }
+
+  Future<bool> isLoggedIn() async {
+    final token = await getToken();
+    return token != null && _firebaseAuth.currentUser != null;
+  }
 }

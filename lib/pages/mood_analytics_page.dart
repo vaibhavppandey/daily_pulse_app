@@ -14,13 +14,6 @@ class MoodAnalyticsPage extends StatefulWidget {
 
 class _MoodAnalyticsPageState extends State<MoodAnalyticsPage> {
   @override
-  void initState() {
-    super.initState();
-    // Load entries when the widget is first created.
-    Provider.of<MoodProvider>(context, listen: false).loadEntries();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

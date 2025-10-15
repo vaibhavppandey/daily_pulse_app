@@ -11,12 +11,6 @@ class MoodHistoryPage extends StatefulWidget {
 }
 
 class _MoodHistoryPageState extends State<MoodHistoryPage> {
-  @override
-  void initState() {
-    super.initState();
-    Provider.of<MoodProvider>(context, listen: false).loadEntries();
-  }
-
   Future<void> _selectDate(BuildContext context) async {
     final moodProvider = Provider.of<MoodProvider>(context, listen: false);
     final DateTime? picked = await showDatePicker(

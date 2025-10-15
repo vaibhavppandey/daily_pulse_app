@@ -29,8 +29,7 @@ class MoodProvider with ChangeNotifier {
       note: note,
     );
     await _firestoreService.addEntry(newEntry);
-    _entries.add(newEntry);
-    notifyListeners();
+    await loadEntries(); // Refresh entries after adding
   }
 
   void setSelectedDate(DateTime date) {

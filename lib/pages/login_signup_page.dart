@@ -26,7 +26,9 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _isLogin ? const LoginCard() : const SignupCard(),
+              _isLogin
+                  ? const LoginCard()
+                  : SignupCard(onSignupSuccess: _toggleForm),
               TextButton(
                 onPressed: _toggleForm,
                 child: Text(

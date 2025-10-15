@@ -9,7 +9,7 @@ class TotalEntriesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Total Entries: \${entries.length}',
+      'Total Entries: ${entries.length}',
       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
     );
   }

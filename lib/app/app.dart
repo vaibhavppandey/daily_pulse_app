@@ -1,3 +1,4 @@
+import 'package:daily_pulse_app/pages/home_page.dart';
 import 'package:daily_pulse_app/pages/login_signup_page.dart';
 import 'package:daily_pulse_app/providers/auth_provider.dart';
 import 'package:daily_pulse_app/providers/mood_provider.dart';
@@ -14,19 +15,21 @@ class DailyPulseApp extends StatefulWidget {
 
 class _DailyPulseAppState extends State<DailyPulseApp> {
   late final ThemeProvider _themeProvider;
+  late final AuthProvider _authProvider;
 
   @override
   void initState() {
     super.initState();
     _themeProvider = ThemeProvider();
     _themeProvider.loadThemeMode();
+    _authProvider = AuthProvider();
   }
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider.value(value: _authProvider),
         ChangeNotifierProvider(create: (_) => MoodProvider()),
         ChangeNotifierProvider.value(value: _themeProvider),
       ],
@@ -44,7 +47,23 @@ class _DailyPulseAppState extends State<DailyPulseApp> {
               ),
             ),
             themeMode: themeProvider.themeMode,
-            home: const LoginSignupPage(),
+            home: FutureBuilder<bool>(
+              future: _authProvider.isLoggedIn(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Scaffold(
+                    body: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+                if (snapshot.hasData && snapshot.data!) {
+                  return const HomePage();
+                } else {
+                  return const LoginSignupPage();
+                }
+              },
+            ),
           );
         },
       ),

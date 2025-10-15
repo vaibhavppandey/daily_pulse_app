@@ -3,6 +3,7 @@ import 'package:daily_pulse_app/pages/mood_analytics_page.dart';
 import 'package:daily_pulse_app/pages/mood_history_page.dart';
 import 'package:daily_pulse_app/pages/mood_logging_page.dart';
 import 'package:daily_pulse_app/providers/auth_provider.dart';
+import 'package:daily_pulse_app/providers/mood_provider.dart';
 import 'package:daily_pulse_app/widgets/theme_switcher_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,13 @@ class _HomePageState extends State<HomePage> {
     MoodHistoryPage(),
     MoodAnalyticsPage(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    // Load entries when the widget is first created.
+    Provider.of<MoodProvider>(context, listen: false).loadEntries();
+  }
 
   void _onItemTapped(int index) {
     setState(() {

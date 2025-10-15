@@ -58,4 +58,8 @@ class AuthProvider with ChangeNotifier {
     _user = null;
     notifyListeners();
   }
+
+  Future<bool> isLoggedIn() async {
+    return await _authService.isLoggedIn();
+  }
 }

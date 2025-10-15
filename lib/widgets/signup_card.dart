@@ -1,10 +1,11 @@
-import 'package:daily_pulse_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 
 class SignupCard extends StatefulWidget {
-  const SignupCard({super.key});
+  final VoidCallback onSignupSuccess;
+
+  const SignupCard({super.key, required this.onSignupSuccess});
 
   @override
   State<SignupCard> createState() => _SignupCardState();
@@ -51,10 +52,7 @@ class _SignupCardState extends State<SignupCard> {
       _passwordController.text,
     );
     if (success && mounted) {
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => const HomePage()),
-        (Route<dynamic> route) => false,
-      );
+      widget.onSignupSuccess();
     }
   }
 

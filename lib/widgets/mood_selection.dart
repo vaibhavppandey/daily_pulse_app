@@ -19,8 +19,9 @@ class MoodSelection extends StatelessWidget {
       child: Row(
         children: moods.map((mood) {
           final isSelected = selectedMood == mood;
-          return GestureDetector(
+          return InkWell(
             onTap: () => onMoodSelected(mood),
+            borderRadius: BorderRadius.circular(10),
             child: Container(
               padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
@@ -28,6 +29,12 @@ class MoodSelection extends StatelessWidget {
                     ? Theme.of(context).primaryColor.withOpacity(0.3)
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: isSelected
+                      ? Theme.of(context).primaryColor
+                      : Colors.grey,
+                  width: 1.5,
+                ),
               ),
               child: Text(
                 mood,
