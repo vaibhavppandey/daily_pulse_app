@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:label="daily_pulse_app"
+        android:label="Daily Pulse"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
